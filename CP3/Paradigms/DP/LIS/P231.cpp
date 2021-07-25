@@ -21,23 +21,15 @@ int LIS(vi v)
     int n = v.size();
     if(n==0)
         return 0;
-    int ans = 1;
-    vi dp(n+1,inf);     // dp[i] represents the smallest value which is at the last index of i - length increasing subsequence
-    dp[0] = -inf;
+    int ans = 0;
+    vi dp(n,inf);     // dp[i] represents the smallest value which is at the last index of i - length increasing subsequence
     auto it = dp.begin();
     advance(it,1);
     loop(i,0,n)
     {
         int ind = distance(dp.begin(),upper_bound(it,dp.end(),v[i]));
         dp[ind] = v[i];
-    }
-    loop(i,0,n+1)
-    {
-        if(dp[i] != inf)
-            ans = i;
-        else
-            break;
-        // cout<<dp[i]<<" ";
+        ans=max(ans,ind);
     }
     return ans;
 }
@@ -46,13 +38,16 @@ int main()
 {
     vi v;
     int t;
+    int ti = 0;
     while(cin>>t && t!=-1)
     {
         v.pb(t);
         while(cin>>t && t!=-1)
             v.pb(t);
         reverse(v.begin(),v.end());
-        cout<<LIS(v)<<endl;
+        printf("Test #%d:\n",++ti);
+        int ans = LIS(v);
+        printf("  maximum possible interceptions: %d\n\n",ans);
         v.clear();
     }
 }
