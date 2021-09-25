@@ -1,3 +1,2 @@
-System #1
-The last domino falls after 5.0 seconds, at key domino 4.
-
+5
+2
